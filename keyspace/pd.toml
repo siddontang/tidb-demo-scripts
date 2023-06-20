@@ -1,0 +1,3 @@
+[keyspace]
+#pre-alloc is used to help create the configured keyspace when starting up.
+pre-alloc = ["user1", "user2"]

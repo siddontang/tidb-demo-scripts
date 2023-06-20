@@ -1,0 +1,17 @@
+pd: $BIN_ROOT/pd/bin/pd-server --name pd --config ./pd.toml --initial-cluster pd=http://127.0.0.1:2380 --data-dir $DATA_ROOT/pd --log-file $DATA_ROOT/pd.log 
+tikv1: $BIN_ROOT/tikv/target/debug/tikv-server -C ./tikv.toml -s $DATA_ROOT/tikv1 -f $DATA_ROOT/tikv1.log 
+
+tidb1: $BIN_ROOT/tidb/bin/tidb-server --keyspace-name=user1 -P 4001 --status 10081 -log-slow-query=$DATA_ROOT/tidb1/tidb1_slow.log -log-file $DATA_ROOT/tidb1/tidb1.log --store=tikv --path=127.0.0.1:2379
+tidb2: $BIN_ROOT/tidb/bin/tidb-server --keyspace-name=user2 -P 4002 --status 10082 -log-slow-query=$DATA_ROOT/tidb2/tidb2_slow.log -log-file $DATA_ROOT/tidb2/tidb2.log --store=tikv --path=127.0.0.1:2379
+
+init1: mysql -h 127.0.0.1 -P 4001 -uroot -e "create database if not exist sbtest";
+init2: mysql -h 127.0.0.1 -P 4002 -uroot -e "create database if not exist sbtest";
+
+prepare1: sysbench --config-file=./sysbench.cnf --mysql-port=4001 --tables=4 --table_size=10000 oltp_point_select prepare
+prepare2: sysbench --config-file=./sysbench.cnf --mysql-port=4002 --tables=4 --table_size=10000 oltp_point_select prepare
+
+clean1: sysbench --config-file=./sysbench.cnf --mysql-port=4001 --tables=4 --table_size=10000 oltp_point_select cleanup
+clean2: sysbench --config-file=./sysbench.cnf --mysql-port=4002 --tables=4 --table_size=10000 oltp_point_select cleanup
+
+run1: sysbench --config-file=./sysbench.cnf --mysql-port=4001 --tables=4 --table_size=10000 oltp_point_select run
+run2: sysbench --config-file=./sysbench.cnf --mysql-port=4002 --tables=4 --table_size=10000 oltp_point_select run

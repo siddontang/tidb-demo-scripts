@@ -1,0 +1,7 @@
+mysql-host=127.0.0.1 
+mysql-user=root 
+mysql-db=sbtest 
+percentile=99 
+report-interval=1 
+threads=4 
+time=1800
