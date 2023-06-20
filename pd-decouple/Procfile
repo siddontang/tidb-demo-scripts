@@ -1,0 +1,7 @@
+# pd: $BIN_ROOT/pd/bin/pd-server --name pd --initial-cluster pd=http://127.0.0.1:2380 --data-dir $DATA_ROOT/pd --log-file $DATA_ROOT/pd.log 
+
+api: $BIN_ROOT/pd/bin/pd-server services api --name pd --initial-cluster pd=http://127.0.0.1:2380 --data-dir $DATA_ROOT/api --log-file $DATA_ROOT/api.log 
+
+tso: $BIN_ROOT/pd/bin/pd-server services tso --listen-addr="http://127.0.0.1:3379" --backend-endpoints="http://127.0.0.1:2379"
+
+bench: $BIN_ROOT/pd/bin/pd-tso-bench
