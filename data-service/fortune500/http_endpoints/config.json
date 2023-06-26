@@ -22,5 +22,29 @@
     "sql_file": "sql/GET-sum_revenue.sql",
     "type": "sql_endpoint",
     "return_type": "json"
+  },
+  {
+    "name": "/avg_revenue",
+    "description": "",
+    "method": "GET",
+    "endpoint": "/avg_revenue",
+    "data_source": {
+      "cluster_id": 1379661944646195930
+    },
+    "params": [
+      {
+        "name": "arg",
+        "type": "number",
+        "required": 0,
+        "default": "2022"
+      }
+    ],
+    "settings": {
+      "timeout": 5000,
+      "row_limit": 50
+    },
+    "sql_file": "sql/GET-avg_revenue.sql",
+    "type": "sql_endpoint",
+    "return_type": "json"
   }
 ]
