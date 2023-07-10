@@ -5,7 +5,7 @@
     "method": "GET",
     "endpoint": "/avg_revenue",
     "data_source": {
-      "cluster_id": 1379661944646195930
+      "cluster_id": 1379661944646254910
     },
     "params": [
       {
@@ -29,7 +29,7 @@
     "method": "GET",
     "endpoint": "/sum_revenue",
     "data_source": {
-      "cluster_id": 1379661944646195930
+      "cluster_id": 1379661944646254910
     },
     "params": [
       {
