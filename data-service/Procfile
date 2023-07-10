@@ -1,9 +1,9 @@
-# 2022_SUM: curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://us-east-1.data.tidbcloud.com/api/v1beta/app/dataapi-rZEsYsIt/endpoint/sum_revenue?arg=2022'
-# 2021_SUM: curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET 'https://us-east-1.data.tidbcloud.com/api/v1beta/app/dataapi-rZEsYsIt/endpoint/sum_revenue?arg=2021'
+# 2022_SUM: curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET '${ENDPOINT}/sum_revenue?arg=2022'
+# 2021_SUM: curl --digest --user ${PUBLIC_KEY}:${PRIVATE_KEY} --request GET '${ENDPOINT}/sum_revenue?arg=2021'
 
 
-2022_SUM: ARG=2022; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "https://us-east-1.data.tidbcloud.com/api/v1beta/app/dataapi-rZEsYsIt/endpoint/sum_revenue?arg=${ARG}" | jq -r '.data.rows[0]."sum(revenues_million)"'
-2021_SUM: ARG=2021; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "https://us-east-1.data.tidbcloud.com/api/v1beta/app/dataapi-rZEsYsIt/endpoint/sum_revenue?arg=${ARG}" | jq -r '.data.rows[0]."sum(revenues_million)"'
+2022_SUM: ARG=2022; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "${ENDPOINT}/sum_revenue?arg=${ARG}" | jq -r '.data.rows[0]."sum(revenues_million)"'
+2021_SUM: ARG=2021; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "${ENDPOINT}/sum_revenue?arg=${ARG}" | jq -r '.data.rows[0]."sum(revenues_million)"'
 
-2022_AVG: ARG=2022; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "https://us-east-1.data.tidbcloud.com/api/v1beta/app/dataapi-rZEsYsIt/endpoint/avg_revenue?arg=${ARG}" | jq -r '.data.rows[0]."avg(revenues_million)"'
-2021_AVG: ARG=2021; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "https://us-east-1.data.tidbcloud.com/api/v1beta/app/dataapi-rZEsYsIt/endpoint/avg_revenue?arg=${ARG}" | jq -r '.data.rows[0]."avg(revenues_million)"'
+2022_AVG: ARG=2022; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "${ENDPOINT}/avg_revenue?arg=${ARG}" | jq -r '.data.rows[0]."avg(revenues_million)"'
+2021_AVG: ARG=2021; http --auth-type=digest --auth="${PUBLIC_KEY}:${PRIVATE_KEY}" GET "${ENDPOINT}/avg_revenue?arg=${ARG}" | jq -r '.data.rows[0]."avg(revenues_million)"'
