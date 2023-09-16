@@ -1,0 +1,32 @@
+[lightning]
+# Log
+level = "info"
+file = "./var/tidb-lightning.log"
+
+[tikv-importer]
+backend = "tidb"
+sorted-kv-dir = "./var"
+
+[mydumper]
+# Directory of the data source.
+data-source-dir = "./data"
+
+[mydumper.csv]
+separator = ','
+delimiter = ''
+header = true
+not-null = false
+null = '\N'
+backslash-escape = true
+trim-last-separator = false
+
+[tidb]
+host = "127.0.0.1"
+port = 4000
+user = "root"
+password = ""
+status-port = 10080
+pd-addr = "127.0.0.1:2379"
+
+[checkpoint]
+dsn = "./var/tidb-lightning-checkpoint.pb"

@@ -1,0 +1,14 @@
+pd: $BIN_ROOT/pd/bin/pd-server --name pd --initial-cluster pd=http://127.0.0.1:2380 --data-dir $DATA_ROOT/pd --log-file $DATA_ROOT/pd.log 
+tikv: $BIN_ROOT/tikv/target/debug/tikv-server -C ./tikv.toml -s $DATA_ROOT/tikv -f $DATA_ROOT/tikv.log 
+
+tidb: $BIN_ROOT/tidb/bin/tidb-server -P 4000 --status 10080 -log-slow-query=$DATA_ROOT/tidb/tidb_slow.log -log-file $DATA_ROOT/tidb/tidb.log --store=tikv --path=127.0.0.1:2379
+
+init: mysql -h 127.0.0.1 -P 4000 -uroot -e "create table if not exists test.t1 (id int primary key, name varchar(256))";
+
+load: $BIN_ROOT/tidb/bin/tidb-lightning -config ./lightning.toml
+
+recover: $BIN_ROOT/tidb/bin/tidb-lightning-ctl --checkpoint-error-destroy=all --config=./lightning.toml
+
+clear: mysql -h 127.0.0.1 -P 4000 -uroot -e "delete from test.t1;"
+
+query: mysql -h 127.0.0.1 -P 4000 -uroot -e "select * from test.t1;"
