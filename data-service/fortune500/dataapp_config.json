@@ -1,5 +1,7 @@
 {
   "app_id": "dataapi-rZEsYsIt",
   "app_name": "Fortune 500",
-  "app_type": "dataapi"
+  "app_type": "dataapp",
+  "description": "",
+  "app_version": "1.0.0"
 }
